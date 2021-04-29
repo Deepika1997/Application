@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fetch</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+    <div>
+        <h1>Getting Started With Fetch API</h1>
+        <button id="fetchUserDataBtn">Fetch User Data</button>
+    </div>
+    <hr>
+    <div id="response"></div>
+    <script>
+        document.getElementById('fetchUserDataBtn').addEventListener('click', fetchUserData);
+    
+        function fetchUserData(){
+            fetch('https://jsonplaceholder.typicode.com/users/')
+                .then(response => response.json())
+                .then(users => {
+                    let output = '<h2>Lists of Users</h2>';
+                    output += '<table border=1>';
+                    users.forEach(function(user) {
+                        output += `
+                            <tr>
+                        	<td>${user.name}</td>
+                        	<td>${user.username}</td>
+                                <td>${user.email}</td>
+                                <td>${user.address.street}</td>
+                            </tr>
+                        `;
+                    });
+                    output += '</table>'
+                    document.getElementById("response").innerHTML = output;
+                });
+        }
+</script>
+</body>
+
+</html>
